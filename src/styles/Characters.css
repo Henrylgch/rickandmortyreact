@@ -1,0 +1,38 @@
+.Characters__container {
+  margin: 0.7rem 0;
+  display: flex;
+  border: 1px solid gray;
+  padding: 1rem;
+  border-radius: 5px;
+  height: 200px;
+  -webkit-box-shadow: 2px 5px 7px -4px #000000; 
+  box-shadow: 2px 5px 7px -4px #000000;
+}
+
+.Characters__avatar-container {
+  display: flex;
+  align-items: center;
+  max-width: 150px;
+}
+
+.Characters__avatar {
+  max-width: 100%;
+  margin-right: 0.5rem;
+}
+
+.Characters__title {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 22px;
+}
+
+.Characters__subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.bold {
+  font-family: 'Raleway', sans-serif;  
+  font-weight: 700;
+}

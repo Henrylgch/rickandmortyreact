@@ -45,6 +45,48 @@ class App extends React.Component {
     }
   }
 
+  getStatus = async (filter) => {
+    this.setState({
+      loading: true, 
+      error: null,
+      data: {
+        info: [],
+        results: []
+      }
+    })
+    try {
+      const response = await fetch(`https://rickandmortyapi.com/api/character/?status=${filter}`)
+      const dataIn = await response.json()
+      console.log(dataIn)
+
+      this.setState({
+        loading: false,
+        data: {
+          info: dataIn.info,
+          results: [].concat(this.state.data.results, dataIn.results),
+          nextPage: this.nextPage + 1
+        }
+      })
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error: error
+      })
+    }
+    console.log(filter);
+  }
+
+  getGender = async (filter) => {
+    console.log(filter);
+    try {
+      const response = await fetch(`https://rickandmortyapi.com/api/character/?gender=${filter}`)
+      const dataIn = response.json()
+      console.log(dataIn)      
+    } catch (error) {
+      
+    }
+  }
+
   render() {
     if (this.state.error) {
       return `Error: ${this.state.error.message}`;
@@ -55,8 +97,9 @@ class App extends React.Component {
 
         <div className="row">
           <div className="col-2">
-            <FilterList />
+            <FilterList eventStatus={this.getStatus} eventGender={this.getGender} />
           </div>
+
           <div className="col" >
             <ul className="row list-uninstyled">
               {this.state.data.results.map(character => (

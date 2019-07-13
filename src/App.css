@@ -16,15 +16,7 @@
 }
 
 .search-input {
-  padding: 1rem;
-  width: 500px;
-  border-radius: 10px;
-  border: 1px solid gray;
-}
-
-.search-input:focus {
-  border: none;
-  border-radius: 10px;
+  width: 590px;
 }
 
 /* Filter List */

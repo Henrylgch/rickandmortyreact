@@ -4,6 +4,7 @@ import './styles/Characters.css'
 
 import Loader from './components/Loader'
 import Header from './components/Header'
+import FilterList from './components/FilterList'
 import Character from './components/Character'
 
 class App extends React.Component {
@@ -54,7 +55,7 @@ class App extends React.Component {
 
         <div className="row">
           <div className="col-2">
-
+            <FilterList />
           </div>
           <div className="col" >
             <ul className="row list-uninstyled">

@@ -10,7 +10,7 @@ class Header extends React.Component {
             <img className="img-fluid logo-navbar" src={logo} alt="Logo de Rick and Morty" />
           <div class="col d-flex justify-content-center">
             <form>
-             <input type="text" placeholder="Encuentra tu personaje" />
+              <input className="search-input" type="text" placeholder="Encuentra tu personaje" />
             </form>
           </div>
         </div>

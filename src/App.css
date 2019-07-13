@@ -14,3 +14,30 @@
 .list-uninstyled {
   list-style: none;
 }
+
+.search-input {
+  padding: 1rem;
+  width: 500px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+
+.search-input:focus {
+  border: none;
+  border-radius: 10px;
+}
+
+/* Filter List */
+.filter-list {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.font-type1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.font-type2 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}

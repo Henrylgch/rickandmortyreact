@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './styles/Characters.css'
 
-import logo from './images/logo.png'
+import Header from './components/Header'
 import Character from './components/Character'
 
 class App extends React.Component {
@@ -29,19 +29,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <header className="container-navbar">
-          <div>
-            <img className="img-fluid logo-navbar" src={logo} alt="Logo de Rick and Morty" />
-          </div>
-          <div>
-            <form>
-             <input type="text" placeholder="Encuentra tu personaje" />
-            </form>
-          </div>
-        </header>
+        <Header />
 
         <div className="row">
           <div className="col-2">
+
           </div>
           <div className="col" >
             <ul className="row list-uninstyled">

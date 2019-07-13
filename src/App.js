@@ -2,11 +2,15 @@ import React from 'react';
 import './App.css';
 import './styles/Characters.css'
 
+import Loader from './components/Loader'
 import Header from './components/Header'
 import Character from './components/Character'
 
 class App extends React.Component {
   state = {
+    nextPage: 1,
+    loading: true,
+    error: null,
     data: {
       info: [],
       results: []
@@ -18,15 +22,32 @@ class App extends React.Component {
   }
 
   fetchCaracter = async () => {
-    const response = await fetch('https://rickandmortyapi.com/api/character');
-    const dataIn = await response.json();
+    this.setState({loading:true, error: null})
 
-    this.setState({
-      data: dataIn
-    })
+    try {
+      const response = await fetch(`https://rickandmortyapi.com/api/character?page=${this.state.nextPage}`);
+      const dataIn = await response.json();
+  
+      this.setState({
+        loading: false,
+        data: {
+          info: dataIn.info,
+          results: [].concat(this.state.data.results, dataIn.results)
+        },
+        nextPage: this.state.nextPage + 1
+      })
+    } catch(error) {
+      this.setState({
+        loading: false,
+        error: error
+      })
+    }
   }
 
   render() {
+    if (this.state.error) {
+      return `Error: ${this.state.error.message}`;
+    }
     return (
       <div className="container-fluid">
         <Header />
@@ -49,6 +70,17 @@ class App extends React.Component {
                     />
                 </li>
               ))}
+              {this.state.loading && (
+                <div className="container">
+                  <Loader />
+                </div>
+                )}
+
+              {!this.state.loading && (
+                <div className="container"> 
+                  <button onClick={() => this.fetchCaracter()} type="button" className="btn btn-info btn-lg btn-block">Cargar mas personajes</button>
+                </div>
+              )}
             </ul>
           </div>
         </div>

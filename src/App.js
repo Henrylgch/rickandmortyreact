@@ -94,6 +94,7 @@ class App extends React.Component {
   }
 
   loadMore = async (url) => {
+    console.log(url)
     this.setState({
       loading: true,
       error: null
@@ -107,7 +108,7 @@ class App extends React.Component {
         loading: false,
         error: null,
         data: {
-          info: {},
+          info: dataIn.info,
           results: [].concat(this.state.data.results, dataIn.results)
         }
       })

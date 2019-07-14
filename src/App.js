@@ -9,7 +9,6 @@ import Character from './components/Character'
 
 class App extends React.Component {
   state = {
-    nextPage: 1,
     loading: true,
     error: null,
     data: {
@@ -26,7 +25,7 @@ class App extends React.Component {
     this.setState({loading:true, error: null})
 
     try {
-      const response = await fetch(`https://rickandmortyapi.com/api/character?page=${this.state.nextPage}`);
+      const response = await fetch(`https://rickandmortyapi.com/api/character/`);
       const dataIn = await response.json();
   
       this.setState({
@@ -35,7 +34,6 @@ class App extends React.Component {
           info: dataIn.info,
           results: [].concat(this.state.data.results, dataIn.results)
         },
-        nextPage: this.state.nextPage + 1
       })
     } catch(error) {
       this.setState({
@@ -80,10 +78,42 @@ class App extends React.Component {
     console.log(filter);
     try {
       const response = await fetch(`https://rickandmortyapi.com/api/character/?gender=${filter}`)
-      const dataIn = response.json()
-      console.log(dataIn)      
+      const dataIn = await response.json()
+      console.log(dataIn)  
+      
+      this.setState({
+        loading: false,
+        data: {
+          info: {},
+          results: dataIn.results
+        }
+      })
     } catch (error) {
       
+    }
+  }
+
+  loadMore = async (url) => {
+    this.setState({
+      loading: true,
+      error: null
+    })
+
+    try {
+      const response = await fetch(url)
+      const dataIn = await response.json()
+      
+      this.setState({
+        loading: false,
+        error: null,
+        data: {
+          info: {},
+          results: [].concat(this.state.data.results, dataIn.results)
+        }
+      })
+      console.log(dataIn)
+    }catch (error) {
+      this.setState({loading: false, error: error})
     }
   }
 
@@ -122,7 +152,7 @@ class App extends React.Component {
 
               {!this.state.loading && (
                 <div className="container"> 
-                  <button onClick={() => this.fetchCaracter()} type="button" className="btn btn-info btn-lg btn-block">Cargar mas personajes</button>
+                  <button onClick={() => this.loadMore(this.state.data.info.next)} type="button" className="btn btn-info btn-lg btn-block">Cargar mas personajes</button>
                 </div>
               )}
             </ul>

@@ -14,7 +14,7 @@ return(
       Bienvenido al mundo
     </h1>
     <h1 className="font-type1">De</h1>
-    <img src={logo} />
+    <img src={logo} alt="Rick and Morty" />
     <Link className="HomePage__btn" to="/app">Mira los personajes</Link>
   </div>
 )

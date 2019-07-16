@@ -115,7 +115,7 @@ class Aplication extends React.Component {
     try {
       const response = await fetch(url)
       const dataIn = await response.json()
-      
+
       this.setState({
         loading: false,
         error: null,
@@ -146,15 +146,23 @@ class Aplication extends React.Component {
     try {
       const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${this.state.value}`)
       const dataIn = await response.json()
-  
-      this.setState({
-        loading: false,
-        data: {
-          info: dataIn.info,
-          results: dataIn.results
-        },
-        nextPage: this.state.nextPage + 1
-      })
+
+
+      if (dataIn.results === undefined) {
+        dataIn.results = [
+          {name: 'No encontrado'}
+        ]
+      } else {
+
+        this.setState({
+          loading: false,
+          data: {
+            info: dataIn.info,
+            results: dataIn.results
+          },
+          nextPage: this.state.nextPage + 1
+        })
+      }
     } catch(error) {
         this.setState({
           loading: false,
@@ -196,9 +204,7 @@ class Aplication extends React.Component {
                 </li>
               ))}
               {this.state.loading && (
-                <div className="container">
                   <Loader />
-                </div>
                 )}
 
               {!this.state.loading && (

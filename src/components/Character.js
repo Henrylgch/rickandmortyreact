@@ -6,7 +6,7 @@ class Character extends React.Component {
     return (
       <div className="Characters__container">
         <h6 className="Characters__title"> {this.props.name}</h6>
-          <img src={this.props.image} className="Characters__avatar" />
+          <img src={this.props.image} className="Characters__avatar" alt="Avatar" />
         <div className="Characters__info">
           <div className="Characters__subtitle"> <span className="bold" >Estado: </span>{this.props.status}</div>
           <div className="Characters__subtitle"> <span className="bold" >Especie: </span>{this.props.species}</div>

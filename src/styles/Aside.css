@@ -1,0 +1,31 @@
+/* Colores
+1: #024959 - Azul oscuro
+2: #04ADBF - Azul iluminado
+3: #037F8C - Azul neutro
+4: #F2F2F2 - Blanco
+5: #0D0D0D - Negro
+*/
+
+.filter-list {
+  list-style: none;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  padding-left: .5rem;
+}
+
+.FilterList__title {
+  color: #D4D952;
+}
+
+.FilterList__item {
+  color: #F2F2F2;
+}
+
+.FilterList__item:hover {
+  color: #D4D952;
+  text-decoration: none;
+}
+
+.list-uninstyled {
+  list-style: none;
+}

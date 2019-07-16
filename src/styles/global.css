@@ -1,0 +1,23 @@
+/* Colores
+1: #024959 - Azul oscuro
+2: #04ADBF - Azul iluminado
+3: #037F8C - Azul neutro
+4: #F2F2F2 - Blanco
+5: #0D0D0D - Negro
+6: #D4D952 - Amarillo
+*/
+
+.AppPage__body {
+  background: #024959;
+  color: #F2F2F2;
+}
+
+
+.font-type1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.font-type2 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}

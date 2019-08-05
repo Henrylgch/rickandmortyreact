@@ -11,7 +11,7 @@ import logo from '../images/logo.png'
 import Loader from '../components/Loader'
 // import Header from './components/Header'
 import FilterList from '../components/FilterList'
-import Character from '../components/Character'
+import CharactersList from '../components/CharactersList'
 
 class Aplication extends React.Component {
   state = {
@@ -78,8 +78,9 @@ class Aplication extends React.Component {
         error: error
       })
     }
-    console.log(filter);
   }
+
+  comp
 
   getGender = async (filter) => {
     this.setState({
@@ -102,7 +103,7 @@ class Aplication extends React.Component {
         }
       })
     } catch (error) {
-      
+      this.setState({error: error, loading: false})
     }
   }
 
@@ -124,57 +125,38 @@ class Aplication extends React.Component {
           results: [].concat(this.state.data.results, dataIn.results)
         }
       })
-      console.log(dataIn)
     }catch (error) {
       this.setState({loading: false, error: error})
     }
   }
 
-  handleChange = (e) => {
-    this.setState({
-      value: e.target.value
-    })
-   this.searchCharacter(e.target.value)
-  }
-
-  searchCharacter = async () => {
+  searchCharacter = async (query) => {
     this.setState({
       loading: true,
       error: null
     })
 
     try {
-      const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${this.state.value}`)
+      const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${query}`)
       const dataIn = await response.json()
-
-
-      if (dataIn.results === undefined) {
-        dataIn.results = [
-          {name: 'No encontrado'}
-        ]
-      } else {
-
-        this.setState({
-          loading: false,
-          data: {
-            info: dataIn.info,
-            results: dataIn.results
-          },
-          nextPage: this.state.nextPage + 1
-        })
-      }
+      
+      this.setState({
+        loading: false,
+        data: {
+          info: dataIn.info,
+          results: dataIn.results
+        },
+      })
     } catch(error) {
         this.setState({
           loading: false,
-          error: error
+          error: error,
+          data: []
         })
       }
   }  
 
   render() {
-    if (this.state.error) {
-      return `Error: ${this.state.error.message}`;
-    }
     return (
       <div className="AppPage__body container-fluid">
         <div className="container Header__container">
@@ -182,37 +164,31 @@ class Aplication extends React.Component {
             <img className="img-fluid logo-navbar" src={logo} alt="Logo de Rick and Morty" />
           </Link>
           <form className="search-form">
-            <input onChange={this.handleChange} className="search-input" type="text" placeholder="Encuentra tu personaje" value={this.state.value} />
+            <input 
+              onChange={(e) => {
+                this.setState({value: e.target.value}) 
+                return this.searchCharacter(e.target.value)
+              }}
+              value={this.state.value} 
+              className="search-input" 
+              type="text" 
+              placeholder="Encuentra tu personaje" 
+              />
           </form>
         </div>
 
         <div className="container-fluid d-flex">
           <FilterList eventStatus={this.getStatus} eventGender={this.getGender} />
 
-          <div>
-            <ul className="row list-uninstyled">
-              {this.state.data.results.map(character => (
-                <li className="col-md-4" key={character.id}>
-                  <Character 
-                    image={character.image} 
-                    name={character.name}  
-                    status={character.status}
-                    species={character.species}
-                    gender={character.gender}
-                    origin={character.origin.name}
-                    />
-                </li>
-              ))}
+          <div className="col">
               {this.state.loading && (
-                  <Loader />
-                )}
-
-              {!this.state.loading && (
-                <div className="container"> 
-                  <button onClick={() => this.loadMore(this.state.data.info.next)} type="button" className="btn btn-info btn-lg btn-block">Cargar mas personajes</button>
-                </div>
+                <Loader />
               )}
-            </ul>
+             <CharactersList 
+              data={this.state.data} 
+              loading={this.state.loading}
+              onClick={() => this.loadMore(this.state.data.info.next)}
+              />
           </div>
         </div>
       </div>

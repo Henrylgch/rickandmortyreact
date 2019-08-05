@@ -8,7 +8,8 @@
 */
 
 .Characters__container {
-  margin: 0.7rem 0;
+  width: 31%;
+  margin: 0.7rem .5rem;
   display: flex;
   flex-wrap: wrap;
   border: 2px solid gray;
@@ -28,13 +29,13 @@
 }
 
 .Characters__info {
-  max-width: 170px;
+  width: 55%;
 }
 
 .Characters__title {
   text-align: center;
   font-family: 'Permanent Marker', cursive;
-  font-size: 22px;
+  font-size: 20px;
   width: 100%;
   margin-bottom: 10px;
   color: #0D0D0D;
@@ -48,6 +49,9 @@
 }
 
 .bold {
-  font-family: 'Raleway', sans-serif;  
   font-weight: 700;
+}
+
+.Characters__search-error {
+  text-align: center;
 }
